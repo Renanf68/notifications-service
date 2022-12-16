@@ -16,6 +16,7 @@ model Notification {
   content String
   category String
   readAt DateTime? // ? indicates it can be null
+  canceledAt DateTime? // ? indicates it can be null
   createdAt DateTime @default(now())
 
   @@index([recipientId])

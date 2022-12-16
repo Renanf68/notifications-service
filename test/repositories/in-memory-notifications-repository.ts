@@ -7,8 +7,21 @@ export class InMemoryNotificationsRepository
 {
   // create a db substitute to initial tests
   public notifications: Notification[] = [];
+  // find
+  async findById(notificationId: string): Promise<Notification | null> {
+    const result = this.notifications.find(
+      (item) => item.id === notificationId,
+    );
+    return result ?? null;
+  }
   // create method
   async create(notification: Notification) {
     this.notifications.push(notification);
+  }
+  async save(notification: Notification): Promise<void> {
+    this.notifications = this.notifications.map((item) => {
+      if (item.id === notification.id) return notification;
+      else return item;
+    });
   }
 }
