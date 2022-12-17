@@ -24,4 +24,16 @@ export class InMemoryNotificationsRepository
       else return item;
     });
   }
+  async countManyByRecipientId(recipientId: string): Promise<number> {
+    const notifications = this.notifications.filter(
+      (item) => item.recipientId === recipientId && !item.readAt,
+    );
+    return notifications.length;
+  }
+  async findManyByRecipientId(recipientId: string): Promise<Notification[]> {
+    const notifications = this.notifications.filter(
+      (item) => item.recipientId === recipientId && !item.readAt,
+    );
+    return notifications;
+  }
 }
